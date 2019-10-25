@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".person.PersonNote"
+    android:background="@color/background1"
+    >
+
+
+    <TextView
+        android:id="@+id/total_person_debit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="DEBIT"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textColor="@color/textcolor1"
+        />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Debit "
+        android:textAlignment="center"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="15dp"
+        android:textSize="30sp"
+        android:layout_marginStart="15dp"
+        android:textColor="@color/textcolor1"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_person"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="30dp"
+        tools:layout_editor_absoluteX="-283dp"
+        tools:layout_editor_absoluteY="-58dp"
+        tools:listitem="@layout/note_person"
+        />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

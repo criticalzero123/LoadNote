@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".landingpage.AddNote"
+    android:background="@color/background1">
+
+    <EditText
+        android:id="@+id/edit_text_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/textcolor1"
+        android:hint="Enter Name.."
+        android:inputType="text"
+        android:textColor="@color/custom_float_bg"
+        android:textColorHint="@color/custom_float_bg" />
+
+    <EditText
+        android:id="@+id/edit_text_debit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/icon"
+        android:hint="Enter Amount.."
+        android:inputType="number"
+        android:textColor="@color/custom_float_bg"
+        android:textColorHint="@color/custom_float_bg" />
+
+    <EditText
+        android:id="@+id/edit_text_load"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/icon"
+        android:hint="Enter Promo.."
+        android:inputType="text"
+        android:textColor="@color/custom_float_bg"
+        android:textColorHint="@color/custom_float_bg"/>
+
+
+</LinearLayout>
