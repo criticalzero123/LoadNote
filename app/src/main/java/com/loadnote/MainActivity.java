@@ -156,6 +156,10 @@ public class MainActivity extends AppCompatActivity {
                     startActivityForResult(intent1, ADD_NOTE_REQUEST);
                     return true;
 
+                case R.id.payment:
+                    Intent intent2 = new Intent(MainActivity.this, CashTotal.class);
+                    startActivity(intent2);
+                    return true;
             }
             return false;
         }

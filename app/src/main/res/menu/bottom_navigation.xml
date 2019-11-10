@@ -6,7 +6,13 @@
         android:title="Note" />
 
     <item
+        android:id="@+id/payment"
+        android:icon="@drawable/ic_payment"
+        android:title="payment"/>
+
+    <item
         android:id="@+id/add"
         android:icon="@drawable/ic_add"
         android:title="Add"/>
+
 </menu>

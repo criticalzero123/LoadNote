@@ -65,7 +65,11 @@ public class AddNote extends AppCompatActivity {
                 String fLoad = tLoad.substring(0,1).toUpperCase() + tLoad.substring(1) + " " + tDebit;
                 int debit = Integer.parseInt(tDebit);
                 if (debit > 0) {
-                    debit += 3;
+                    if(debit < 100)
+                        debit += 3;
+                    else
+                        debit += 5;
+
                     data.putExtra(EXTRA_NAME, fName);
                     data.putExtra(EXTRA_DEBIT, debit);
                     data.putExtra(EXTRA_LOAD,fLoad);
