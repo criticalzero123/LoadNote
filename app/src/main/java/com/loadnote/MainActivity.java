@@ -1,9 +1,11 @@
 package com.loadnote;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -39,14 +41,22 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class MainActivity extends AppCompatActivity {
     public static final int ADD_NOTE_REQUEST = 1;
 
+    private SharedPreferences mPreferences;
+    private SharedPreferences.Editor mEditorPreferences;
+
+    private String personName;
+
     private NoteViewModel noteViewModel;
+    private NoteViewModel paymentViewModel;
     private TextView total_debit;
     private NoteAdapter adapter;
+    private static int totalCollect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
@@ -60,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
 
+        //for the payment
+        paymentViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
 
         //for the name
         noteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
@@ -69,6 +81,9 @@ public class MainActivity extends AppCompatActivity {
         total_debit = findViewById(R.id.total_debit);
         NoteViewModel totalDebitViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
         totalDebitViewModel.getTotal_debit().observe(this, integer -> total_debit.setText((integer == null) ? "0" : Integer.toString(integer)));
+
+
+
 
 
         //for delete
@@ -84,11 +99,15 @@ public class MainActivity extends AppCompatActivity {
                 SweetAlertDialog alertDialog = new SweetAlertDialog(MainActivity.this, SweetAlertDialog.WARNING_TYPE);
                 alertDialog.setCanceledOnTouchOutside(false);
 
+                        personName = adapter.getNameAt(viewHolder.getAdapterPosition());
+
                         alertDialog.setTitleText("Are you sure?")
                         .setConfirmText("Yes")
                         .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                             @Override
                             public void onClick(SweetAlertDialog sDialog) {
+                                payment();
+
                                 noteViewModel.deletePerson(adapter.getNameAt(viewHolder.getAdapterPosition()));
                                 Toast.makeText(MainActivity.this, "Person deleted", Toast.LENGTH_SHORT).show();
                                 sDialog.dismissWithAnimation();
@@ -118,6 +137,28 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void payment() {
+        paymentViewModel.setTotalDebitPerson(this.getPersonName());
+
+
+        //TODO: sa totalCollect i butang ang ge delete na person
+        
+
+        //for the Payment
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditorPreferences = mPreferences.edit();
+
+        //getting sa total collect na ni exist if wala ang defValue maoy ma butang
+        String total = mPreferences.getString("com.loadnote.COLLECTED", ""+0);
+
+        //adding ang ge pang delete
+        totalCollect += Integer.parseInt(total);
+
+        mEditorPreferences.putString("com.loadnote.COLLECTED", ""+totalCollect);
+
+        mEditorPreferences.apply();
+
+    }
 
 
     //when click the add note
@@ -218,6 +259,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         return true;
+    }
+
+    private String getPersonName(){
+        return personName;
     }
 
 
