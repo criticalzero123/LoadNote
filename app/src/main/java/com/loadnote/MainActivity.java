@@ -140,9 +140,9 @@ public class MainActivity extends AppCompatActivity {
     private void payment() {
         paymentViewModel.setTotalDebitPerson(this.getPersonName());
 
-
+        Toast.makeText(this, this.getPersonName(), Toast.LENGTH_SHORT).show();
         //TODO: sa totalCollect i butang ang ge delete na person
-        
+        //totalCollect =
 
         //for the Payment
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
