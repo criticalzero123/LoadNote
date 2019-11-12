@@ -8,7 +8,7 @@
     <item
         android:id="@+id/payment"
         android:icon="@drawable/ic_payment"
-        android:title="Payment"/>
+        android:title="Collected"/>
 
     <item
         android:id="@+id/add"

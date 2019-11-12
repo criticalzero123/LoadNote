@@ -104,29 +104,29 @@ public class MainActivity extends AppCompatActivity {
                 SweetAlertDialog alertDialog = new SweetAlertDialog(MainActivity.this, SweetAlertDialog.WARNING_TYPE);
                 alertDialog.setCanceledOnTouchOutside(false);
 
-                        personName = adapter.getNameAt(viewHolder.getAdapterPosition());
+                personName = adapter.getNameAt(viewHolder.getAdapterPosition());
 
-                        alertDialog.setTitleText("Are you sure?")
-                        .setConfirmText("Yes")
-                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sDialog) {
-                                payment();
+                alertDialog.setTitleText("Confirmation!")
+                .setConfirmText("Yes")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        payment();
 
-                                noteViewModel.deletePerson(adapter.getNameAt(viewHolder.getAdapterPosition()));
-                                Toast.makeText(MainActivity.this, "Person deleted", Toast.LENGTH_SHORT).show();
-                                sDialog.dismissWithAnimation();
-                            }
-                        })
-                        .setCancelButton("No", new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(SweetAlertDialog sDialog) {
-                                noteViewModel.getAllName().observe(MainActivity.this, strings -> adapter.setNames(strings));
-                                Toast.makeText(MainActivity.this, "Cancelled", Toast.LENGTH_SHORT).show();
-                                sDialog.dismissWithAnimation();
-                            }
-                        })
-                        .show();
+                        noteViewModel.deletePerson(adapter.getNameAt(viewHolder.getAdapterPosition()));
+                        Toast.makeText(MainActivity.this, "Person deleted", Toast.LENGTH_SHORT).show();
+                        sDialog.dismissWithAnimation();
+                    }
+                })
+                .setCancelButton("No", new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        noteViewModel.getAllName().observe(MainActivity.this, strings -> adapter.setNames(strings));
+                        Toast.makeText(MainActivity.this, "Cancelled", Toast.LENGTH_SHORT).show();
+                        sDialog.dismissWithAnimation();
+                    }
+                })
+                .show();
             }
         }).attachToRecyclerView(recyclerView);
 
