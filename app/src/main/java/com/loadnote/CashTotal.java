@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class CashTotal extends AppCompatActivity {
 
     private TextView totalPay;
+    private final static String KEY = "com.loadnote.COLLECTED";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +24,7 @@ public class CashTotal extends AppCompatActivity {
 
         paymentEditor.apply();
 
-        String total = payment.getString("com.loadnote.COLLECTED", ""+0);
+        String total = payment.getString(KEY, ""+0);
         totalPay.setText(total);
     }
 }

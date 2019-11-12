@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences mPreferences;
     private SharedPreferences.Editor mEditorPreferences;
+    private final static String KEY = "com.loadnote.COLLECTED";
 
     private String personName;
 
@@ -51,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView total_debit;
     private NoteAdapter adapter;
     private static int totalCollect;
+
+    //This is for the key in payment method
+    private static int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,24 +145,36 @@ public class MainActivity extends AppCompatActivity {
     private void payment() {
         paymentViewModel.setTotalDebitPerson(this.getPersonName());
 
-        Toast.makeText(this, this.getPersonName(), Toast.LENGTH_SHORT).show();
-        //TODO: sa totalCollect i butang ang ge delete na person
-        //totalCollect =
-
         //for the Payment
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mEditorPreferences = mPreferences.edit();
+        paymentViewModel.getTotalDebitPerson().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                //TODO: delete this after the 2 delete is not being called trice
+                //increment by 1 to make the key = 1 or to access the if below
+                ++i;
 
-        //getting sa total collect na ni exist if wala ang defValue maoy ma butang
-        String total = mPreferences.getString("com.loadnote.COLLECTED", ""+0);
+                totalCollect = integer;
 
-        //adding ang ge pang delete
-        totalCollect += Integer.parseInt(total);
+                Toast.makeText(MainActivity.this, getPersonName()+ i, Toast.LENGTH_SHORT).show();
 
-        mEditorPreferences.putString("com.loadnote.COLLECTED", ""+totalCollect);
+                //TODO: error after 2 deletes(Solution is the dont make it count every delete)
+                //Solution #1: make a key to access the preferences
+                if(i == 1) {
+                    //getting sa total collect na ni exist if wala ang defValue maoy ma butang
+                    String total = mPreferences.getString(KEY, ""+0);
 
-        mEditorPreferences.apply();
+                    int temp = totalCollect + Integer.parseInt(total);
+                    mEditorPreferences.putString(KEY, "" + temp);
 
+                    mEditorPreferences.apply();
+                }
+            }
+        });
+
+        //RETURN IT FROM DEFAULT
+        i = 0;
     }
 
 
