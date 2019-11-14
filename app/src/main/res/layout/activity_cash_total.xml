@@ -29,6 +29,27 @@
         android:textColor="@color/textcolor1"
     />
 
+    <TextView
+        android:text="TOTAL GAIN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="320dp"
+        android:textSize="35sp"
+        android:textColor="@color/textcolor1"
+        />
+
+    <TextView
+        android:id="@+id/text_view_profit"
+        android:text="0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginTop="365dp"
+        android:textSize="50sp"
+        android:textColor="@color/textcolor1"
+        />
+
     <Button
         android:id="@+id/cash_in"
         android:layout_width="match_parent"

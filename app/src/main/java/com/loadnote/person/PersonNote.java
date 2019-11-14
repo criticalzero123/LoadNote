@@ -78,6 +78,12 @@ public class PersonNote extends AppCompatActivity {
                                 viewModel.delete(adapter.getNoteAt(viewHolder.getAdapterPosition()));
                                 Toast.makeText(PersonNote.this, "Note deleted", Toast.LENGTH_SHORT).show();
                                 sDialog.dismissWithAnimation();
+
+                                //refresh the activity
+                                finish();
+                                overridePendingTransition(0, 0);
+                                startActivity(getIntent());
+                                overridePendingTransition(0, 0);
                             }
                         })
                         .setCancelButton("No", new SweetAlertDialog.OnSweetClickListener() {
